@@ -65,9 +65,9 @@ class BottomNavigationCircles : BottomNavigationView {
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) :
-        super(context, attrs, defStyleAttr) {
-            init(attrs)
-        }
+            super(context, attrs, defStyleAttr) {
+        init(attrs)
+    }
 
     private fun init(attrs: AttributeSet? = null) {
         getColors(attrs)
@@ -79,7 +79,7 @@ class BottomNavigationCircles : BottomNavigationView {
     }
 
     private fun getColors(attrs: AttributeSet?) {
-        circleColor = getAttributeColorOrDefault(attrs)
+        circleColor = ContextCompat.getColor(context,R.color.cardview_shadow_end_color)
         val textView = TextView(context)
         textColor = textView.currentTextColor
     }
@@ -171,9 +171,9 @@ class BottomNavigationCircles : BottomNavigationView {
         ) {
             val navigationItemView =
                 (
-                    (rootLayout.getChildAt(0) as BottomNavigationMenuView)
-                        .getChildAt(0) as NavigationBarItemView
-                )
+                        (rootLayout.getChildAt(0) as BottomNavigationMenuView)
+                            .getChildAt(0) as NavigationBarItemView
+                        )
 
             navigationItemView.viewTreeObserver.addOnGlobalLayoutListener {
                 animateBottomIcon(selectedItemId)
@@ -204,8 +204,8 @@ class BottomNavigationCircles : BottomNavigationView {
                 currentView.drawable.setTint(Color.BLACK)
 
                 animatorSet.playTogether(
-                    buildTranslateIconAnimator(currentView, -(height / 4).toFloat(), 0f),
-                    buildTranslateCircleAnimator(oldCircle, -(height / 4).toFloat(), 0f),
+//                    buildTranslateIconAnimator(currentView, 0f, 0f),
+                    buildTranslateCircleAnimator(oldCircle, 0f, 0f),
                     buildTintAnimator(currentView, enabledColor, disabledColor)
                 )
                 oldCircle.animate()
@@ -230,13 +230,14 @@ class BottomNavigationCircles : BottomNavigationView {
             setCircleSizeAndPosition(
                 circleView,
                 subText.height,
-                icon.width * 2,
-                itemView.x + itemView.width / 2 - icon.width
+                icon.width * 3,
+                itemView.x + itemView.width / 2 - icon.width - 40,
+                itemView.y+50
             )
 
             animatorSet.playTogether(
-                buildTranslateIconAnimator(icon, 0f, -(height / 4).toFloat()),
-                buildTranslateCircleAnimator(circleView, 0f, -(height / 4).toFloat()),
+//                buildTranslateIconAnimator(icon, 0f, 0f),
+                buildTranslateCircleAnimator(circleView, 0f, 0f),
                 buildTintAnimator(icon, disabledColor, enabledColor)
             )
 
@@ -273,33 +274,33 @@ class BottomNavigationCircles : BottomNavigationView {
     }
 
     private fun buildTranslateIconAnimator(currentView: View, from: Float, to: Float):
-        ObjectAnimator {
-            return ObjectAnimator.ofFloat(
-                currentView,
-                "translationY",
-                from, to
-            ).setDuration(500)
-        }
+            ObjectAnimator {
+        return ObjectAnimator.ofFloat(
+            currentView,
+            "translationY",
+            from, to
+        ).setDuration(500)
+    }
 
     private fun buildTranslateCircleAnimator(oldCircle: View, from: Float, to: Float):
-        ObjectAnimator {
-            return ObjectAnimator.ofFloat(
-                oldCircle,
-                "translationY",
-                from, to
-            ).setDuration(500)
-        }
+            ObjectAnimator {
+        return ObjectAnimator.ofFloat(
+            oldCircle,
+            "translationY",
+            from, to
+        ).setDuration(500)
+    }
 
     private fun buildTintAnimator(currentView: AppCompatImageView, from: Int, to: Int):
-        ValueAnimator {
-            val animateTint = ValueAnimator.ofArgb(from, to)
-            animateTint.duration = 500
-            animateTint.addUpdateListener {
-                currentView.drawable.setTint(it.animatedValue as Int)
-            }
-
-            return animateTint
+            ValueAnimator {
+        val animateTint = ValueAnimator.ofArgb(from, to)
+        animateTint.duration = 500
+        animateTint.addUpdateListener {
+            currentView.drawable.setTint(it.animatedValue as Int)
         }
+
+        return animateTint
+    }
 
     private fun buildBackgroundCircle(): ImageView {
         val circleView = ImageView(context)
@@ -314,7 +315,7 @@ class BottomNavigationCircles : BottomNavigationView {
                     R.drawable.bg_green_rectangle
                 )
             }
-            backgroundShapeDrawable?.setTint(circleColor)
+//            backgroundShapeDrawable?.setTint(circleColor)
             circleView.setImageDrawable(backgroundShapeDrawable)
         } else {
             val drawable = ContextCompat.getDrawable(context, customBackgroundDrawable)
@@ -329,13 +330,15 @@ class BottomNavigationCircles : BottomNavigationView {
         circleView: ImageView,
         paddingBottom: Int,
         size: Int,
-        x: Float
+        x: Float,
+        y: Float
     ) {
         val params = circleView.layoutParams
-        circleView.setPadding(0, 0, 0, paddingBottom / 3)
+        circleView.setPadding(0, 0, 0, 0)
         params.width = size
         params.height = size
         circleView.layoutParams = params
         circleView.x = x
+        circleView.y = y
     }
 }

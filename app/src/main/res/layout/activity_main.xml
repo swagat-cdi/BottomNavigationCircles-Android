@@ -10,12 +10,44 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
-        <com.github.kwasow.bottomnavigationcircles.BottomNavigationCircles
-            android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+        <RelativeLayout
+            android:layout_alignParentBottom="true"
             android:layout_gravity="start|bottom"
-            app:menu="@menu/menu_bottom_navigation_bar"/>
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <androidx.cardview.widget.CardView
+                android:layout_centerVertical="true"
+                android:elevation="1dp"
+                app:cardBackgroundColor="@color/black"
+                android:layout_width="match_parent"
+                app:cardCornerRadius="33dp"
+                android:layout_height="55dp"/>
+
+            <FrameLayout
+                android:elevation="2dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.github.kwasow.bottomnavigationcircles.BottomNavigationCircles
+                    android:id="@+id/bottomNavigation"
+                    android:layout_width="match_parent"
+                    app:labelVisibilityMode="unlabeled"
+                    app:circleColor="@color/black"
+                    app:itemIconSize="30dp"
+                    android:background="#00000000"
+                    app:elevation="0dp"
+                    android:layout_height="75dp"
+                    app:menu="@menu/menu_bottom_navigation_bar"/>
+
+            </FrameLayout>
+
+
+
+
+        </RelativeLayout>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
