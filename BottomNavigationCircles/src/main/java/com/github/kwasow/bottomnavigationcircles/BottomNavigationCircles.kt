@@ -315,7 +315,7 @@ class BottomNavigationCircles : BottomNavigationView {
                     R.drawable.bg_green_rectangle
                 )
             }
-//            backgroundShapeDrawable?.setTint(circleColor)
+            backgroundShapeDrawable?.setTint(circleColor)
             circleView.setImageDrawable(backgroundShapeDrawable)
         } else {
             val drawable = ContextCompat.getDrawable(context, customBackgroundDrawable)

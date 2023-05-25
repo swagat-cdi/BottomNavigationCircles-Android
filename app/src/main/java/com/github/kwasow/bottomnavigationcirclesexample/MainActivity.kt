@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val bottomNavigation = findViewById<BottomNavigationCircles>(R.id.bottomNavigation)
-        bottomNavigation.circleColor = Color.RED
+        bottomNavigation.circleColor = Color.BLUE
         // bottomNavigation.backgroundShape = BottomNavigationCircles.Shape.RoundedRectangle
     }
 }
