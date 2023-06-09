@@ -6,7 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <!-- The main content view -->
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <RelativeLayout
+        android:id="@+id/mainConatiner"
         android:layout_height="match_parent"
         android:layout_width="match_parent">
 
@@ -49,6 +50,6 @@
         </RelativeLayout>
 
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

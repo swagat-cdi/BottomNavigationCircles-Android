@@ -231,7 +231,7 @@ class BottomNavigationCircles : BottomNavigationView {
                 circleView,
                 subText.height,
                 icon.width * 3,
-                itemView.x + itemView.width / 2 - icon.width - 40,
+                itemView.x+icon.width/2,
                 itemView.y+50
             )
 
