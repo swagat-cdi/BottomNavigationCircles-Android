@@ -79,7 +79,7 @@ class BottomNavigationCircles : BottomNavigationView {
     }
 
     private fun getColors(attrs: AttributeSet?) {
-        circleColor = ContextCompat.getColor(context,R.color.cardview_shadow_end_color)
+        circleColor = getAttributeColorOrDefault(attrs)
         val textView = TextView(context)
         textColor = textView.currentTextColor
     }
@@ -204,8 +204,8 @@ class BottomNavigationCircles : BottomNavigationView {
                 currentView.drawable.setTint(Color.BLACK)
 
                 animatorSet.playTogether(
-//                    buildTranslateIconAnimator(currentView, 0f, 0f),
-                    buildTranslateCircleAnimator(oldCircle, 0f, 0f),
+//                    buildTranslateIconAnimator(currentView, -(height / 4).toFloat(), 0f),
+//                    buildTranslateCircleAnimator(oldCircle, -(height / 4).toFloat(), 0f),
                     buildTintAnimator(currentView, enabledColor, disabledColor)
                 )
                 oldCircle.animate()
@@ -230,14 +230,14 @@ class BottomNavigationCircles : BottomNavigationView {
             setCircleSizeAndPosition(
                 circleView,
                 subText.height,
-                icon.width * 3,
-                itemView.x+icon.width/2,
-                itemView.y+50
+                icon.width * 4,
+                itemView.x + itemView.width / 2 - (icon.width*2),
+                0f
             )
 
             animatorSet.playTogether(
-//                buildTranslateIconAnimator(icon, 0f, 0f),
-                buildTranslateCircleAnimator(circleView, 0f, 0f),
+//                buildTranslateIconAnimator(icon, 0f, -(height / 4).toFloat()),
+//                buildTranslateCircleAnimator(circleView, 0f, -(height / 4).toFloat()),
                 buildTintAnimator(icon, disabledColor, enabledColor)
             )
 
@@ -334,7 +334,7 @@ class BottomNavigationCircles : BottomNavigationView {
         y: Float
     ) {
         val params = circleView.layoutParams
-        circleView.setPadding(0, 0, 0, 0)
+        circleView.setPadding(0, 0, 0, paddingBottom / 3)
         params.width = size
         params.height = size
         circleView.layoutParams = params

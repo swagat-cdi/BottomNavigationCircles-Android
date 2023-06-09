@@ -19,9 +19,10 @@
 
 
             <androidx.cardview.widget.CardView
+                android:layout_marginHorizontal="15dp"
                 android:layout_centerVertical="true"
                 android:elevation="1dp"
-                app:cardBackgroundColor="@color/black"
+                app:cardBackgroundColor="#FF9595"
                 android:layout_width="match_parent"
                 app:cardCornerRadius="33dp"
                 android:layout_height="55dp"/>
